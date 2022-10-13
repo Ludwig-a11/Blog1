@@ -4,6 +4,9 @@ const express = require('express');
 //? files
 const {port} = require('./config')
 
+//?Routes
+const userRouter = require('./users/users.router');
+
 //?Initial configs
 const app = express()
 
@@ -16,7 +19,7 @@ app.get('/', (req,res) => {
   })
 })
 
-
+app.use('/api/v1/users', userRouter)
 
 
 

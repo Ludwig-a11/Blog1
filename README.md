@@ -6,6 +6,10 @@
 -Autenticacion con Tokens 
 -Bcrypt para hashear contraseñas 
 -Uso de JSON Web Token 
+-Passport 
+-Passport-jwt
+-Jsonwebtoken
+
 
 -----
 
