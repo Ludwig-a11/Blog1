@@ -1,16 +1,37 @@
 //? Dependencies
 const express = require('express');
+const db = require('./utils/database');
+
 
 //? files
 const {port} = require('./config')
 
 //?Routes
 const userRouter = require('./users/users.router');
+const authRouter = require('./auth/auth.router');
 
 //?Initial configs
 const app = express()
 
 app.use(express.json())
+
+db.authenticate()
+    .then(() => {
+        console.log('DB Authenticated')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+db.sync()
+    .then(() => {
+        console.log('DB Synced')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+
 
 app.get('/', (req,res) => {
   res.status(200).json({
@@ -20,6 +41,7 @@ app.get('/', (req,res) => {
 })
 
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/auth', authRouter)
 
 
 

@@ -57,7 +57,8 @@ const Users = db.define("users", {
   isVerified: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    field: 'is_verified'  //field asigna el nombre de la colimna en nuestra base de datos
+    field: 'is_verified',
+    defaultValue: false   //field asigna el nombre de la colimna en nuestra base de datos
   },
 });
 

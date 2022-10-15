@@ -4,8 +4,9 @@ const { ParameterDescriptionMessage } = require('pg-protocol/dist/messages')
 require('dotenv').config()
 
 const config ={
-  port: process-env.PORT || 9000,
+  port: process.env.PORT || 9000,
   nodeEnv: process.env.NODE_ENV || 'development', //? desarrollo, testing, produccion
+  jwtSecret: process.env.JWT_SECRET, //? NO pasar sugerencia - por seguirdad -
   db:{
     host: process.env.DB_HOST || 'localhost',
     username: process.env.DB_USER || 'postgres',

@@ -8,7 +8,7 @@ const { hashPassword } = require('../utils/crypto');
 const getAllUsers = async() =>{
   const data = await Users.findAll()
   return data
-} 
+}; 
 
 const getAllUsersById = async(id) => {
   const data  = await Users.findOne({
@@ -17,7 +17,7 @@ const getAllUsersById = async(id) => {
     }
   })
   return data
-}
+};
 
 const createUser = async(data) =>{
   const newUser = await Users.create({
@@ -32,7 +32,7 @@ const createUser = async(data) =>{
     country: data.country,
   })
   return newUser
-}
+};
 
 const updateUser = async(id, data) => {
   const result = await Users.update(data, {
@@ -41,7 +41,7 @@ const updateUser = async(id, data) => {
     }
   })
   return result
-}
+};
 
 const deleteUser = async(id) => {
   const data = await Users.destroy({
@@ -50,12 +50,22 @@ const deleteUser = async(id) => {
     }
   })
   return data 
-}
+};
+
+const getUserByEmail = async(email) => {
+  const data = await Users.findOne({
+    where: {
+      email: email
+    }
+  })
+  return data 
+};
 
 module.exports = {
   getAllUsers,
   getAllUsersById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserByEmail
 }
