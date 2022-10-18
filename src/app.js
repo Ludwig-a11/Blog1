@@ -6,9 +6,11 @@ const db = require('./utils/database');
 //? files
 const {port} = require('./config')
 
+
 //?Routes
 const userRouter = require('./users/users.router');
 const authRouter = require('./auth/auth.router');
+const initModels = require('./models/initModels');
 
 //?Initial configs
 const app = express()
@@ -30,7 +32,7 @@ db.sync()
     .catch(err => {
         console.log(err)
     })
-
+initModels()
 
 
 app.get('/', (req,res) => {
