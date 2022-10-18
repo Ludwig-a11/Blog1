@@ -6,14 +6,19 @@ const { hashPassword } = require('../utils/crypto');
 
 
 const getAllUsers = async() =>{
-  const data = await Users.findAll()
+  const data = await Users.findAll({
+    where: {
+      status:'active'
+    }
+})
   return data
 }; 
 
 const getAllUsersById = async(id) => {
   const data  = await Users.findOne({
     where: {
-      id: id
+      id: id, 
+      status: 'active'
     }
   })
   return data
