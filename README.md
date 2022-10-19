@@ -1,31 +1,37 @@
-# SKELETON 
+# Blog API 
 
--Express
--PostgreSQL
--Sequeliza ORM 
--Autenticacion con Tokens 
--Bcrypt para hashear contraseñas 
--Uso de JSON Web Token 
--Passport 
--Passport-jwt
--Jsonwebtoken
+- ¿Que acciones queremos que el front haga?
+- Front:
+  -Obtener todas las publicaciones
+  -Obtener una en especifico
+  -Obtener todas las categorias
+  -Obtener todos los posts de una categoria en especial
+  -Obtener todos los posts que he creado (/me/post)
+  -Obtener todos los posts de un usuario en especial
+  -Podemos paginar los posts
+  -Acciones CRUD sobre Posts
+  -Crear categorias 
 
 
------
-
--Rutas de Login y creacion de usuarios (register)
--Herramienta para publicar imagenes de perfil
-- CRUD de usuarios con autenticacion y manejo de permisos
-- /users/:id DELETE, PUT
-- /users/me
-
-Orden
-1.app.js
-2..env
-3.config.js
-4 database.js
-5.models
-6.controllers
-7.sercies
-8.routes
-
+```json
+  {
+    "total": 68,
+    "prev": "localhost:9000/api/v1/posts?start=50&limit=60",
+    "next": "localhost:9000/api/v1/posts?start=61&limit=68",
+    "data": [
+      {
+        "id": "1",
+        "title": "ejemplo",
+        "content": "lorem ipsum",
+        "createdBy": {
+          "id" : "18",
+          "name": "Luis",
+          "email": "luis@academlo.com"        }
+      },
+        "category":{
+          "id": 4,
+          "name": "Technology"
+        } 
+    ]
+  }
+```
