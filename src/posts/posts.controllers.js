@@ -3,15 +3,25 @@ const Categories = require('../models/categories.models');
 const Posts = require('../models/posts.models');
 const Users = require('../models/users.models');
 
-
+//? incluyes otras tablas
 const getAllPosts = async() =>{
   const data = await Posts.findAll({
+
+    attributes: {
+      exclude: ['userId', 'categoryId', 'createdAt','updatedAt']
+
+    },
     include: [
       {
-        model: Users
+        model: Users,
+        as: 'user',
+        attributes: ['id', 'firstName', 'lastName', 'email']
+        
       },
       {
-        model: Categories
+        model: Categories,
+        as: 'category'
+
       }
     ]
   })
@@ -19,7 +29,29 @@ const getAllPosts = async() =>{
 };
 
 const getPostById = async(id) => {
+  const data = await Posts.findOne({
+    where: {
+      id
+    },
+    attributes: {
+      exclude: ['userId', 'categoryId', 'createdAt','updatedAt']
 
+    },
+    include: [
+      {
+        model: Users,
+        as: 'user',
+        attributes: ['id', 'firstName', 'lastName', 'email']
+        
+      },
+      {
+        model: Categories,
+        as: 'category'
+
+      }
+    ]
+  })
+  return data  
 };
 
 const createPost = async (data) => {
@@ -27,15 +59,25 @@ const createPost = async (data) => {
       id: uuid.v4(),
       title: data.title,
       content: data.content,
-      createdBy: data.userId,
+      userId: data.userId,
       categoryId: data.categoryId
   })
   return response
+};
+
+const getPostByCategory = async(categoryId) => {
+  const data = await Posts.findAll({
+    where: {
+      categoryId
+    }
+  })
+  return data
 };
 
 
 module.exports = {
   getAllPosts,
   getPostById,
-  createPost
+  createPost,
+  getPostByCategory
 };

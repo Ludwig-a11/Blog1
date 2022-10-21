@@ -36,7 +36,19 @@ const { title, content, categoryId  } = req.body
 
 };
 
+const getPostByCategory =(req, res) => {
+  const categoryId = req.params.id
+  postControllers.getPostByCategory(categoryId)
+  .then(data => {
+    res.status(200).json(data)
+  })
+  .catch(err => {
+    res.status(400).json({message: err.message})
+  })
+};
+
 module.exports = {
   createPost,
-  getAllPosts
+  getAllPosts,
+  getPostByCategory
 }
