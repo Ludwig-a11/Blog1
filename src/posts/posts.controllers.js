@@ -4,8 +4,11 @@ const Posts = require('../models/posts.models');
 const Users = require('../models/users.models');
 
 //? incluyes otras tablas
-const getAllPosts = async() =>{
+const getAllPosts = async(offset, limit) =>{
   const data = await Posts.findAll({
+    
+    offset: offset,
+    limit: limit,
 
     attributes: {
       exclude: ['userId', 'categoryId', 'createdAt','updatedAt']
