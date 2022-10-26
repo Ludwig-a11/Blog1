@@ -5,7 +5,7 @@ const Users = require('../models/users.models');
 
 //? incluyes otras tablas
 const getAllPosts = async(offset, limit) =>{
-  const data = await Posts.findAll({
+  const data = await Posts.findAndCountAll({
     
     offset: offset,
     limit: limit,

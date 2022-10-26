@@ -10,15 +10,17 @@ const getAllPosts = (req, res) => {
 
   const urlBase = `${host}/api/v1/posts`
   
-
-  postControllers.getAllPosts(offset, limit)
+    postControllers.getAllPosts(offset, limit)
   .then(data =>{
+    const nextPage = data.count - offset >= limit ? `${urlBase}?offset=${offset + limit}&limit=${limit}` : null
+    const prevPage = offset - limit >= 0 ? `${urlBase}?offset=${offset - limit}&limit=${limit}` : null
     res.status(200).json({
-      next: `${urlBase}?offset=${offset + limit}&limit=${limit}`,
-      prev:`${urlBase}`,
+      next: nextPage,
+      prev: prevPage,
+      items: data.count,
       offset,
       limit,
-      results: data
+      results: data.rows
     })
   })
   .catch(err => {
